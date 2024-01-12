@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Login from './Login.js';
 import Register from './Register.js';
-import Main from './Main.js'; // Create Main.js for your main page
+import Main from './Main.js';
 
 const App = () => {
     const [showLogin, setShowLogin] = useState(true);
@@ -22,9 +22,9 @@ const App = () => {
             ) : (
                 <>
                     {showLogin ? (
-                        <Login onLoginSuccess={handleLoginSuccess} />
+                        <Login onLoginSuccess={handleLoginSuccess} toggleForm={toggleForm} />
                     ) : (
-                        <Register />
+                        <Register toggleForm={toggleForm} />
                     )}
                     <button onClick={toggleForm}>
                         {showLogin ? 'Go to Register' : 'Go to Login'}

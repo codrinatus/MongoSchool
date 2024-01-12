@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import './Login.css';
 
-const Login = ({ onLoginSuccess }) => {
+const Login = ({ onLoginSuccess, toggleForm }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [loginError, setLoginError] = useState('');
 
     const handleLogin = async () => {
         try {
@@ -20,10 +22,11 @@ const Login = ({ onLoginSuccess }) => {
                 console.log(token.token);
                 onLoginSuccess();
             } else {
-                console.error('Login failed');
+                setLoginError('Login failed. Check your credentials.');
             }
         } catch (error) {
             console.error('Error during login:', error);
+            setLoginError('Error during login');
         }
     };
 
@@ -32,14 +35,18 @@ const Login = ({ onLoginSuccess }) => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Login</h1>
-            <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
-                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit">Login</button>
-                <button type="button" onClick={redirectToSwaggerUI}>Go to Swagger UI</button>
+            <form className="form" onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
+                <input className="input" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input className="input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button className="button" type="submit">Login</button>
+                <button className="button" type="button" onClick={redirectToSwaggerUI}>Go to Swagger UI</button>
             </form>
+            {loginError && <p>{loginError}</p>}
+            <button className="toggle-button" onClick={toggleForm}>
+                Go to Register
+            </button>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import './Login.css';
 
-const Register = () => {
+const Register = ({ toggleForm }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [registrationMessage, setRegistrationMessage] = useState('');
@@ -33,14 +34,15 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit">Register</button>
+            <form className="form" onSubmit={handleSubmit}>
+                <input className="input" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input className="input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button className="button" type="submit">Register</button>
             </form>
             {registrationMessage && <p>{registrationMessage}</p>}
+            <button className="toggle-button" onClick={toggleForm}>Go to Login</button> {}
         </div>
     );
 };
